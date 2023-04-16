@@ -1,5 +1,12 @@
+import { LoginForm } from "../../components";
+import { LoginProvider } from "../../context";
+
 const Login = () => {
-  return null;
+  return (
+    <LoginProvider>
+      <LoginForm />
+    </LoginProvider>
+  );
 };
 
 export default Login;
