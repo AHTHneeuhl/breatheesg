@@ -4,7 +4,7 @@ import { businessGroups } from "../api";
 import { useAppDispatch } from "../redux/store/hooks";
 import { setBusinessGroups } from "../redux/slices/business";
 import { IBusinessGroup } from "../api/businessGroups";
-import { useReactQuery } from "../hooks";
+import { useNotification, useReactQuery } from "../hooks";
 
 type TContext = {
   handleCreateGroup: (values: IBusinessGroup) => void;
@@ -18,6 +18,7 @@ export const BusinessGroupContext = createContext<TContext>({
 
 const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const dispatch = useAppDispatch();
+  const notification = useNotification();
 
   const { execute: createGroup } = useReactQuery(
     businessGroups.createBusinessGroup
@@ -40,6 +41,7 @@ const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
     createGroup(values, {
       onSuccess: (data) => {
         execute();
+        notification.notifySuccess("Business group created successfully");
       },
     });
   };

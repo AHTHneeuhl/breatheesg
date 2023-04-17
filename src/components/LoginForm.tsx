@@ -9,7 +9,7 @@ const initialFormValues = {
 };
 
 const LoginForm: React.FC = () => {
-  const { handleLogin } = useLogin();
+  const { handleLogin, isLoading } = useLogin();
 
   return (
     <Formik
@@ -44,7 +44,9 @@ const LoginForm: React.FC = () => {
             placeholder="Password"
           />
           {errors.password && <div>{errors.password}</div>}
-          <Button type="submit">Login</Button>
+          <Button type="submit" isLoading={isLoading}>
+            Login
+          </Button>
         </form>
       )}
     </Formik>

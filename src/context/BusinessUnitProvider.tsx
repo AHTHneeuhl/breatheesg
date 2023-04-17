@@ -3,7 +3,7 @@ import { createContext, useEffect } from "react";
 import { businessUnits } from "../api";
 import { useAppDispatch } from "../redux/store/hooks";
 import { IBusinessUnit } from "../api/businessUnits";
-import { useReactQuery } from "../hooks";
+import { useNotification, useReactQuery } from "../hooks";
 import { setBusinessUnits } from "../redux/slices/business";
 
 type TContext = {
@@ -18,6 +18,7 @@ export const BusinessUnitContext = createContext<TContext>({
 
 const BusinessUnitProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const dispatch = useAppDispatch();
+  const notification = useNotification();
 
   const { execute: createUnit } = useReactQuery(
     businessUnits.createBusinessUnit
@@ -40,6 +41,7 @@ const BusinessUnitProvider = ({ children }: React.PropsWithChildren<{}>) => {
     createUnit(values, {
       onSuccess: (data) => {
         execute();
+        notification.notifySuccess("Business unit created successfully");
       },
     });
   };
