@@ -27,6 +27,46 @@ const AddBusinessUnit: React.FC = () => {
             placeholder="Name"
           />
           {errors.name && <div>{errors.name}</div>}
+          <Input
+            name="address"
+            value={values.address}
+            onChange={handleChange}
+            type="text"
+            placeholder="Address"
+          />
+          {errors.address && <div>{errors.address}</div>}
+          <Input
+            name="industry"
+            value={values.industry}
+            onChange={handleChange}
+            type="text"
+            placeholder="Industry"
+          />
+          {errors.industry && <div>{errors.industry}</div>}
+          <Input
+            name="sector"
+            value={values.sector}
+            onChange={handleChange}
+            type="text"
+            placeholder="Sector"
+          />
+          {errors.sector && <div>{errors.sector}</div>}
+          <Input
+            name="state"
+            value={values.state}
+            onChange={handleChange}
+            type="text"
+            placeholder="State"
+          />
+          {errors.state && <div>{errors.state}</div>}
+          <Input
+            name="type"
+            value={values.type}
+            onChange={handleChange}
+            type="text"
+            placeholder="Type"
+          />
+          {errors.type && <div>{errors.type}</div>}
           <Textarea
             name="description"
             value={values.description}
