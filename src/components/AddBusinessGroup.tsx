@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { useBusinessGroups } from "../hooks";
 
 const initialFormValues = {
-  title: "",
+  name: "",
   description: "",
 };
 
@@ -15,13 +15,13 @@ const AddBusinessGroup: React.FC = () => {
       {({ handleSubmit, errors, values, handleChange }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            name="title"
-            value={values.title}
+            name="name"
+            value={values.name}
             onChange={handleChange}
             type="text"
-            placeholder="Title"
+            placeholder="Name"
           />
-          {errors.title && <div>{errors.title}</div>}
+          {errors.name && <div>{errors.name}</div>}
           <Textarea
             name="description"
             value={values.description}

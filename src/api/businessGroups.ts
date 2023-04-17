@@ -1,7 +1,7 @@
 import breatheAPI from "./breatheAPI";
 
 export interface IBusinessGroup {
-  title: string;
+  name: string;
   description: string;
 }
 
@@ -17,10 +17,11 @@ const businessGroups = {
     }
   },
 
-  createBusinessGroup: async ({ title, description }: IBusinessGroup) => {
+  createBusinessGroup: async ({ name, description }: IBusinessGroup) => {
     try {
       const { data } = await breatheAPI.post(URL, {
-        name: title,
+        name,
+
         description,
       });
       return data;
