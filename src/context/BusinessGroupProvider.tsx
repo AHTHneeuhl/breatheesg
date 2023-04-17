@@ -3,11 +3,23 @@ import { createContext, useEffect } from "react";
 import { businessGroups } from "../api";
 import { useAppDispatch } from "../redux/store/hooks";
 import { setBusinessGroups } from "../redux/slices/business";
+import { IBusinessGroup } from "../api/businessGroups";
+import { useReactQuery } from "../hooks";
 
-export const BusinessGroupContext = createContext<null>(null);
+type TContext = {
+  handleCreateGroup: (values: IBusinessGroup) => void;
+};
+
+export const BusinessGroupContext = createContext<TContext>({
+  handleCreateGroup: () => {},
+});
 
 const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const dispatch = useAppDispatch();
+
+  const { execute: createGroup } = useReactQuery(
+    businessGroups.createBusinessGroup
+  );
 
   const { mutate } = useMutation(businessGroups.getBusinessGroups, {
     onSuccess: (data) => {
@@ -18,8 +30,16 @@ const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
     mutate();
   }, [mutate]);
 
+  const handleCreateGroup = (values: IBusinessGroup) => {
+    createGroup(values, {
+      onSuccess: (data) => {
+        console.log(data);
+      },
+    });
+  };
+
   return (
-    <BusinessGroupContext.Provider value={null}>
+    <BusinessGroupContext.Provider value={{ handleCreateGroup }}>
       {children}
     </BusinessGroupContext.Provider>
   );

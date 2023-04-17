@@ -1,5 +1,6 @@
 import { Button, Input, Textarea } from "@chakra-ui/react";
 import { Formik } from "formik";
+import { useBusinessGroups } from "../hooks";
 
 const initialFormValues = {
   title: "",
@@ -7,8 +8,10 @@ const initialFormValues = {
 };
 
 const AddBusinessGroup: React.FC = () => {
+  const { handleCreateGroup } = useBusinessGroups();
+
   return (
-    <Formik initialValues={initialFormValues} onSubmit={() => {}}>
+    <Formik initialValues={initialFormValues} onSubmit={handleCreateGroup}>
       {({ handleSubmit, errors, values, handleChange }) => (
         <form onSubmit={handleSubmit}>
           <Input

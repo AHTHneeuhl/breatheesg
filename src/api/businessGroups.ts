@@ -1,6 +1,11 @@
 import breatheAPI from "./breatheAPI";
 
-const URL = "enterprise/business-groups";
+export interface IBusinessGroup {
+  title: string;
+  description: string;
+}
+
+const URL = "enterprise/business-groups/";
 
 const businessGroups = {
   getBusinessGroups: async () => {
@@ -12,9 +17,12 @@ const businessGroups = {
     }
   },
 
-  createBusinessGroup: async () => {
+  createBusinessGroup: async ({ title, description }: IBusinessGroup) => {
     try {
-      const { data } = await breatheAPI.post(URL);
+      const { data } = await breatheAPI.post(URL, {
+        name: title,
+        description,
+      });
       return data;
     } catch (e) {
       console.log(e);

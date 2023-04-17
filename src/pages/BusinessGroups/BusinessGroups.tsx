@@ -1,5 +1,12 @@
+import { AddBusinessGroup } from "../../components";
+import { BusinessGroupsProvider } from "../../context";
+
 const BusinessGroups = () => {
-  return null;
+  return (
+    <BusinessGroupsProvider>
+      <AddBusinessGroup />
+    </BusinessGroupsProvider>
+  );
 };
 
 export default BusinessGroups;
