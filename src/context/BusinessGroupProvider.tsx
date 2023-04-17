@@ -8,10 +8,12 @@ import { useReactQuery } from "../hooks";
 
 type TContext = {
   handleCreateGroup: (values: IBusinessGroup) => void;
+  isGroupCreating: boolean;
 };
 
 export const BusinessGroupContext = createContext<TContext>({
   handleCreateGroup: () => {},
+  isGroupCreating: false,
 });
 
 const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
@@ -21,25 +23,31 @@ const BusinessGroupProvider = ({ children }: React.PropsWithChildren<{}>) => {
     businessGroups.createBusinessGroup
   );
 
-  const { mutate } = useMutation(businessGroups.getBusinessGroups, {
-    onSuccess: (data) => {
-      console.log(data);
-    },
-  });
+  const { execute, isLoading: isGroupCreating } = useReactQuery(
+    businessGroups.getBusinessGroups,
+    {
+      onSuccess: (data) => {
+        dispatch(setBusinessGroups(data.groups));
+      },
+    }
+  );
+
   useEffect(() => {
-    mutate();
-  }, [mutate]);
+    execute();
+  }, [execute]);
 
   const handleCreateGroup = (values: IBusinessGroup) => {
     createGroup(values, {
       onSuccess: (data) => {
-        console.log(data);
+        execute();
       },
     });
   };
 
   return (
-    <BusinessGroupContext.Provider value={{ handleCreateGroup }}>
+    <BusinessGroupContext.Provider
+      value={{ handleCreateGroup, isGroupCreating }}
+    >
       {children}
     </BusinessGroupContext.Provider>
   );

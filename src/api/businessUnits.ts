@@ -1,3 +1,4 @@
+import { UnitsAdapter } from "../adapters";
 import breatheAPI from "./breatheAPI";
 
 export interface IBusinessUnit {
@@ -11,12 +12,13 @@ export interface IBusinessUnit {
 }
 
 const URL = "enterprise/business-units/";
+const adapter = new UnitsAdapter();
 
 const businessUnits = {
   getBusinessUnits: async () => {
     try {
       const { data } = await breatheAPI(URL);
-      return data;
+      return adapter.getResponse(data);
     } catch (e) {
       console.log(e);
     }

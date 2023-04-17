@@ -1,19 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IBusinessUnit } from "../../../adapters/types";
 
 const initialState = {
-  units: [],
+  units: [] as IBusinessUnit[],
 };
 
 export const units = createSlice({
   name: "units",
   initialState,
   reducers: {
-    setunits: (state, action) => {
+    setBusinessUnits: (state, action) => {
       state.units = action.payload;
     },
   },
 });
 
-export const { setunits } = units.actions;
+export const { setBusinessUnits } = units.actions;
 
 export default units.reducer;

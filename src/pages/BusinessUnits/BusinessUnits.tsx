@@ -1,11 +1,13 @@
-import { AddBusinessUnit, UnitList } from "../../components";
+import { Box } from "@chakra-ui/react";
+import { UnitList } from "../../components";
 import { BusinessUnitsProvider } from "../../context";
 
 const BusinessUnits = () => {
   return (
     <BusinessUnitsProvider>
-      <AddBusinessUnit />
-      <UnitList />
+      <Box maxW="84%" mx="auto">
+        <UnitList />
+      </Box>
     </BusinessUnitsProvider>
   );
 };

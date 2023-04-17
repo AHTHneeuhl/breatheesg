@@ -1,4 +1,4 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { loginFormValidation } from "../config";
 import { useLogin } from "../hooks";
@@ -18,7 +18,16 @@ const LoginForm: React.FC = () => {
       onSubmit={handleLogin}
     >
       {({ handleSubmit, errors, values, handleChange }) => (
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            maxWidth: "24rem",
+            margin: "5rem auto 0",
+          }}
+        >
           <Input
             name="username"
             value={values.username}

@@ -1,3 +1,4 @@
+import { GroupsAdapter } from "../adapters";
 import breatheAPI from "./breatheAPI";
 
 export interface IBusinessGroup {
@@ -6,12 +7,13 @@ export interface IBusinessGroup {
 }
 
 const URL = "enterprise/business-groups/";
+const adapter = new GroupsAdapter();
 
 const businessGroups = {
   getBusinessGroups: async () => {
     try {
       const { data } = await breatheAPI(URL);
-      return data;
+      return adapter.getResponse(data);
     } catch (e) {
       console.log(e);
     }
