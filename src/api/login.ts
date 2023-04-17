@@ -7,7 +7,7 @@ export interface ILogin {
 
 const login = async ({ username, password }: ILogin) => {
   try {
-    const { data } = await breatheAPI.post("register/", {
+    const { data } = await breatheAPI.post("login/", {
       username,
       password,
     });
