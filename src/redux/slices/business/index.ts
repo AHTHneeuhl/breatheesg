@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import businessGroups from "./businessGroups";
+import groups from "./groups";
 
 export default combineReducers({
-  businessGroups,
+  groups,
 });
 
-export * from "./businessGroups";
+export * from "./groups";
