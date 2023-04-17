@@ -1,19 +1,24 @@
 import breatheAPI from "./breatheAPI";
 
+const URL = "enterprise/business-groups";
+
 const businessGroups = {
   getBusinessGroups: async () => {
     try {
-      console.log(import.meta.env.API_URL);
-      const { data } = await breatheAPI("enterprise/business-groups");
+      const { data } = await breatheAPI(URL);
       return data;
     } catch (e) {
       console.log(e);
     }
   },
 
-  postBusinessGroup: async () => {
+  createBusinessGroup: async () => {
     try {
-    } catch (e) {}
+      const { data } = await breatheAPI.post(URL);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 
